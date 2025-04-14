@@ -6,7 +6,7 @@ The main objective of this platform is to simulate a basic exchange where users 
 ## 🛠️ Stack
 
 - **Frontend**: React
-- **Backend**: Deno
+- **Backend**: Node
 - **Database**: PostgreSQL
 - **ORM**: 
 - **Authentication**: JWT-based auth
