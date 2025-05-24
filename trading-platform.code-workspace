@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "⚙️ BACKEND",
+      "path": "./backend"
+    },
+    {
+      "name": "📺 FRONTEND",
+      "path": "./frontend"
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "auto",
+  }
+}
