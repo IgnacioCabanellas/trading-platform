@@ -7,7 +7,7 @@ import { AuthService } from "@/application/auth/auth.service";
 @JsonController("/auth")
 @Service()
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post("/login")
   public login(@Body() request: LoginRequest): LoginResponse {

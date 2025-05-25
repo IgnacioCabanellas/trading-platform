@@ -4,6 +4,7 @@
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
 
   // Editor settings
   "editor.formatOnSave": true,
