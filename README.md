@@ -5,16 +5,36 @@ The main objective of this platform is to simulate a basic exchange where users 
 
 ## 🛠️ Stack
 
-- **Frontend**: React
-- **Backend**: Node
-- **Database**: PostgreSQL
-- **ORM**: 
-- **Authentication**: JWT-based auth
-- **Deployment**: 
+### Backend
+
+| Component | Category | Purpose |
+|-|-|-|
+| node | Runtime Environment | JavaScript runtime for executing server-side code |
+| postgresql | Database | Relational database used for persistent data storage |
+| express | Web Framework / HTTP Server | Core HTTP server and routing |
+| typedi | Dependency Injection | Manages class dependencies and lifecycles |
+| routing-controllers | Routing | Declarative routing with decorators |
+| class-validator | Input Validation | Validates request data based on decorators |
+| class-transformer | Input Transformation | Apply common transformations to requests |
+| dotenv | Environment Configuration | Loads config from `.env` file |
+| winston | Logging | Structured, customizable logging |
+
+### Frontend
+
+| Component | Category | Purpose |
+|-|-|-|
+| react | Frontend Library | Framework for building user interfaces |
 
 ## 📦 Installation
 
+1. Clone the git repository.
+
 ```bash
-git clone https://github.com/your-username/trading-platform.git
-cd trading-platform
-# install backend & frontend dependencies
+git clone https://github.com/IgnacioCabanellas/trading-platform.git
+```
+
+2. Initialize each project.
+
+```bash
+npm install
+```
