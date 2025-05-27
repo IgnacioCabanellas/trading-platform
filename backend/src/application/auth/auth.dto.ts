@@ -10,6 +10,7 @@ export class LoginRequest {
   password!: string;
 }
 
-export interface LoginResponse {
-  jwt: string;
+export class LoginResponse {
+  @IsString()
+  jwt!: string;
 }

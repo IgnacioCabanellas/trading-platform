@@ -1,4 +1,9 @@
-export interface HealthResponse {
-  timestamp: string;
-  message: string;
+import { IsString } from "class-validator";
+
+export class HealthResponse {
+  @IsString()
+  timestamp!: string;
+
+  @IsString()
+  message!: string;
 }

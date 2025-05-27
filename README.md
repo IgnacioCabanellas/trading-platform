@@ -18,6 +18,7 @@ The main objective of this platform is to simulate a basic exchange where users 
 | class-transformer | Input Transformation | Apply common transformations to requests |
 | dotenv | Environment Configuration | Loads config from `.env` file |
 | winston | Logging | Structured, customizable logging |
+| swagger ui | Documentation | Generate and view endpoint schema documentation |
 
 ### Frontend
 

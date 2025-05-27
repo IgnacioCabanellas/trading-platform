@@ -1,9 +1,17 @@
+import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import express from "express";
+import { OpenAPIObject } from "openapi3-ts";
 import "reflect-metadata";
-import { useContainer, useExpressServer } from "routing-controllers";
+import {
+  getMetadataArgsStorage,
+  useContainer,
+  useExpressServer,
+} from "routing-controllers";
+import { routingControllersToSpec } from "routing-controllers-openapi";
+import * as swagger from "swagger-ui-express";
 import { Container } from "typedi";
 
-import { environment } from "@/config/environment";
+import { environment, isDevelopment } from "@/config/environment";
 import { LoggerService } from "@/shared/logger.service";
 import { requestLogger } from "@/shared/request-logger.middleware";
 
@@ -14,21 +22,55 @@ export class App {
 
   constructor() {
     this.app = express();
-    this.initializeMiddleware();
+    this.initializePreControllerMiddleware();
     this.initializeControllers();
+    this.initializePostControllerMiddleware();
   }
 
   private initializeControllers(): void {
     useContainer(Container);
     useExpressServer(this.app, {
-      controllers: [`${__dirname}/application/**/*.controller.ts`],
+      controllers: [this.getControllersDirectoryPattern()],
+      routePrefix: "/api",
       validation: true,
       classTransformer: true,
     });
   }
 
-  private initializeMiddleware(): void {
+  private initializePreControllerMiddleware(): void {
     this.app.use(requestLogger());
+  }
+
+  private initializePostControllerMiddleware(): void {
+    if (isDevelopment()) {
+      const specs = this.buildOpenApiSpecs();
+      this.app.use("/docs", swagger.serve, swagger.setup(specs));
+    }
+  }
+
+  private buildOpenApiSpecs(): OpenAPIObject {
+    const schemas = validationMetadatasToSchemas({
+      refPointerPrefix: "#/components/schemas/",
+    });
+
+    const storage = getMetadataArgsStorage();
+    return routingControllersToSpec(
+      storage,
+      { controllers: [this.getControllersDirectoryPattern()] },
+      {
+        components: {
+          schemas,
+        },
+        info: {
+          title: "Trading Platform",
+          version: "1.0.0",
+        },
+      }
+    );
+  }
+
+  private getControllersDirectoryPattern(): string {
+    return `${__dirname}/application/**/*.controller.ts`;
   }
 
   public listen(): void {

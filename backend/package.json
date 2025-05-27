@@ -20,10 +20,13 @@
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
+    "class-validator-jsonschema": "^5.0.2",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "reflect-metadata": "^0.2.2",
     "routing-controllers": "^0.11.2",
+    "routing-controllers-openapi": "^5.0.0",
+    "swagger-ui-express": "^5.0.1",
     "typedi": "^0.10.0",
     "winston": "^3.17.0"
   },
@@ -31,6 +34,7 @@
     "@eslint/js": "^9.27.0",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.21",
+    "@types/swagger-ui-express": "^4.1.8",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
