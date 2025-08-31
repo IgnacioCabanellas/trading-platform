@@ -1,4 +1,5 @@
 import { IsEmail, IsString, IsUUID } from "class-validator";
+import { DataTypes } from "sequelize";
 import {
   Column,
   CreatedAt,
@@ -9,6 +10,11 @@ import {
   Table,
   UpdatedAt,
 } from "sequelize-typescript";
+
+enum UserRole {
+  customer = "customer",
+  admin = "admin",
+}
 
 @Table({
   tableName: "users",
@@ -35,6 +41,13 @@ export class User extends Model {
   })
   @IsString()
   passwordHash!: string;
+
+  @Column({
+    type: DataTypes.ENUM(...Object.values(UserRole)),
+    allowNull: false,
+    defaultValue: UserRole.customer,
+  })
+  role!: UserRole;
 
   @CreatedAt
   createdAt!: Date;
