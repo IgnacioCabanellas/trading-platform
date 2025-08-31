@@ -1,9 +1,9 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class LoginRequest {
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
-  username!: string;
+  email!: string;
 
   @IsString()
   @IsNotEmpty()
@@ -13,4 +13,22 @@ export class LoginRequest {
 export class LoginResponse {
   @IsString()
   jwt!: string;
+}
+
+export class RegisterRequest {
+  @IsEmail()
+  @IsNotEmpty()
+  email!: string;
+
+  @IsString()
+  @MinLength(8)
+  password!: string;
+}
+
+export class RegisterResponse {
+  @IsString()
+  id!: string;
+
+  @IsString()
+  email!: string;
 }

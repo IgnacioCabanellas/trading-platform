@@ -8,7 +8,7 @@ export const environment = {
   databaseUrl: process.env.DATABASE_URL || "",
   jwtSecret: process.env.JWT_SECRET || "fallback-secret",
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "24h",
-} as const;
+};
 
 export const isDevelopment = (): boolean =>
   environment.nodeEnv === "development";
