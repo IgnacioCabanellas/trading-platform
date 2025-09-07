@@ -5,13 +5,14 @@
 -- Create database
 -- CREATE DATABASE trading_platform;
 
+-- Enable UUID extension
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- =====================================================
 -- Create custom types
 -- =====================================================
 CREATE TYPE user_role AS ENUM ('USER', 'ADMIN');
 CREATE TYPE order_type AS ENUM ('BUY', 'SELL');
-CREATE TYPE order_status AS ENUM ('PENDING', 'PARTIALLY_FILLED', 'FILLED', 'CANCELLED');
-CREATE TYPE match_status AS ENUM ('PENDING', 'COMPLETED', 'CANCELLED');
 CREATE TYPE movement_type AS ENUM ('D', 'W');
 
 -- =====================================================
@@ -140,8 +141,8 @@ CREATE TABLE movements (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-CREATE INDEX idx_movement_balance ON movement(balance_id);
-CREATE INDEX idx_movement_created ON movement(created_at);
+CREATE INDEX idx_movement_balance ON movements(balance_id);
+CREATE INDEX idx_movement_created ON movements(created_at);
 
 -- =====================================================
 -- FOREIGN KEY CONSTRAINTS
