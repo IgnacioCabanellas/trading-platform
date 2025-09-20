@@ -28,4 +28,7 @@ process.on("SIGINT", () => {
   setTimeout(() => process.exit(0), 100);
 });
 
-app.listen();
+app.listen().catch((error) => {
+  logger.error(`Failed to start server: ${error}`);
+  process.exit(1);
+});

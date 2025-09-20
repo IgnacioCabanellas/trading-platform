@@ -12,6 +12,7 @@ import * as swagger from "swagger-ui-express";
 import { Container } from "typedi";
 
 import { environment, isDevelopment } from "@/config/environment";
+import { sequelize } from "@/config/sequelize";
 import { LoggerService } from "@/shared/logger.service";
 import { requestLogger } from "@/shared/request-logger.middleware";
 
@@ -73,7 +74,19 @@ export class App {
     return `${__dirname}/application/**/*.controller.ts`;
   }
 
-  public listen(): void {
+  private async initializeDatabase(): Promise<void> {
+    try {
+      await sequelize.authenticate();
+      logger.info("Database connection established successfully");
+    } catch (error) {
+      logger.error(`Unable to connect to the database: ${error}`);
+      process.exit(1);
+    }
+  }
+
+  public async listen(): Promise<void> {
+    await this.initializeDatabase();
+    
     this.app.listen(environment.port, () => {
       logger.info(`Server running on port ${environment.port}`);
     });
