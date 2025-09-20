@@ -1,10 +1,9 @@
-import { IsEmail, IsString, IsUUID } from "class-validator";
+import { IsBoolean, IsEmail, IsEnum, IsString, IsUUID } from "class-validator";
 import { DataTypes } from "sequelize";
 import {
   Column,
   CreatedAt,
   DataType,
-  Default,
   Model,
   PrimaryKey,
   Table,
@@ -12,8 +11,8 @@ import {
 } from "sequelize-typescript";
 
 enum UserRole {
-  customer = "customer",
-  admin = "admin",
+  user = "USER",
+  admin = "ADMIN",
 }
 
 @Table({
@@ -22,13 +21,15 @@ enum UserRole {
 })
 export class User extends Model {
   @PrimaryKey
-  @Default(DataType.UUIDV4)
-  @Column(DataType.UUIDV4)
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+  })
   @IsUUID()
   id!: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(255),
     allowNull: false,
     unique: true,
   })
@@ -40,14 +41,39 @@ export class User extends Model {
     allowNull: false,
   })
   @IsString()
-  passwordHash!: string;
+  password!: string;
 
   @Column({
     type: DataTypes.ENUM(...Object.values(UserRole)),
     allowNull: false,
-    defaultValue: UserRole.customer,
+    defaultValue: UserRole.user,
   })
+  @IsEnum(UserRole)
   role!: UserRole;
+
+  @Column({
+    type: DataType.UUID,
+    allowNull: true,
+    field: 'limit_id',
+  })
+  @IsUUID()
+  limitId?: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+  })
+  @IsBoolean()
+  enabled!: boolean;
+
+  @Column({
+    type: DataType.UUID,
+    allowNull: true,
+    field: 'created_by',
+  })
+  @IsUUID()
+  createdBy?: string;
 
   @CreatedAt
   createdAt!: Date;

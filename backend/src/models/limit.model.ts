@@ -3,7 +3,6 @@ import {
   Column,
   CreatedAt,
   DataType,
-  Default,
   Model,
   PrimaryKey,
   Table,
@@ -16,21 +15,24 @@ import {
 })
 export class Limit extends Model {
   @PrimaryKey
-  @Default(DataType.UUIDV4)
-  @Column(DataType.UUIDV4)
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+  })
   @IsUUID()
   id!: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(100),
     allowNull: false,
   })
   @IsString()
   name!: string;
 
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.DECIMAL(20, 8),
     allowNull: false,
+    field: 'max_amount',
   })
   @IsNumber()
   maxAmount!: number;
@@ -38,6 +40,7 @@ export class Limit extends Model {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
+    field: 'max_daily_orders',
   })
   @IsNumber()
   maxDailyOrders!: number;
@@ -45,14 +48,15 @@ export class Limit extends Model {
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
+    defaultValue: true,
   })
   @IsBoolean()
-  @Default(false)
   enabled!: boolean;
 
   @Column({
     type: DataType.UUID,
     allowNull: true,
+    field: 'created_by',
   })
   @IsUUID()
   createdBy?: string;

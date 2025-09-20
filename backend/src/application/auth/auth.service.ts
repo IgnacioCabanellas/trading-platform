@@ -20,7 +20,7 @@ export class AuthService {
 
     const isPasswordValid = await bcrypt.compare(
       request.password,
-      user.passwordHash
+      user.password
     );
     if (!isPasswordValid) {
       throw new Error("Invalid credentials");
@@ -47,11 +47,11 @@ export class AuthService {
     }
 
     const saltRounds = 10;
-    const passwordHash = await bcrypt.hash(request.password, saltRounds);
+    const password = await bcrypt.hash(request.password, saltRounds);
 
     const user = await User.create({
       email: request.email,
-      passwordHash,
+      password,
     });
 
     return {
