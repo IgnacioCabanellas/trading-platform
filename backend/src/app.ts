@@ -15,6 +15,7 @@ import { environment, isDevelopment } from "@/config/environment";
 import { sequelize } from "@/config/sequelize";
 import { LoggerService } from "@/shared/logger.service";
 import { requestLogger } from "@/shared/request-logger.middleware";
+import { authenticateJWT, authorizationChecker, currentUserChecker } from "@/shared/auth.middleware";
 
 const logger = Container.get(LoggerService);
 
@@ -38,11 +39,14 @@ export class App {
         forbidNonWhitelisted: true
       },
       classTransformer: true,
+      authorizationChecker,
+      currentUserChecker,
     });
   }
 
   private initializePreControllerMiddleware(): void {
     this.app.use(requestLogger());
+    this.app.use(authenticateJWT);
   }
 
   private initializePostControllerMiddleware(): void {

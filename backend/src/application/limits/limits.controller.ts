@@ -1,8 +1,9 @@
-import { Body, Delete, Get, JsonController, OnUndefined, Param, Post, Put, QueryParams } from "routing-controllers";
+import { Authorized, Body, CurrentUser, Delete, Get, JsonController, OnUndefined, Param, Post, Put, QueryParams } from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { Service } from "typedi";
 import { LimitsService } from "./limits.service";
 import { CreateLimitRequest, GetLimitsRequest, LimitResponse, UpdateLimitRequest } from "./limits.dto";
+import { User } from "@/models/user.model";
 
 @JsonController("/limits")
 @Service()
@@ -14,25 +15,29 @@ export class LimitsController {
     }
 
     @Get()
-    @OpenAPI({ summary: "Get limits" })
+    @Authorized("ADMIN")
+    @OpenAPI({ summary: "Get limits - Admin only" })
     get(@QueryParams() params: GetLimitsRequest): Promise<LimitResponse[]> {
         return this.limitsService.get(params);
     }
 
     @Get("/:id")
-    @OpenAPI({ summary: "Get limit by id" })
-    getById(@Param("id") id: string): Promise<LimitResponse> {
+    @Authorized()
+    @OpenAPI({ summary: "Get limit by id " })
+    getById(@Param("id") id: string, @CurrentUser() user: User): Promise<LimitResponse> {
         return this.limitsService.getById(id);
     }
 
     @Post()
-    @OpenAPI({ summary: "Create limit" })
+    @Authorized("ADMIN")
+    @OpenAPI({ summary: "Create limit - Admin only" })
     create(@Body() body: CreateLimitRequest): Promise<LimitResponse> {
         return this.limitsService.create(body);
     }
 
     @Put("/:id")
-    @OpenAPI({ summary: "Update limit" })
+    @Authorized("ADMIN")
+    @OpenAPI({ summary: "Update limit - Admin only" })
     update(
         @Param("id") id: string,
         @Body() body: UpdateLimitRequest
@@ -41,7 +46,8 @@ export class LimitsController {
     }
 
     @Delete("/:id")
-    @OpenAPI({ summary: "Delete limit" })
+    @Authorized("ADMIN")
+    @OpenAPI({ summary: "Delete limit - Admin only" })
     @OnUndefined(200)
     delete(@Param("id") id: string): Promise<void> {
         return this.limitsService.delete(id);
