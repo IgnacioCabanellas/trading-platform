@@ -33,7 +33,10 @@ export class App {
     useExpressServer(this.app, {
       controllers: [this.getControllersDirectoryPattern()],
       routePrefix: "/api",
-      validation: true,
+      validation: {
+        whitelist: true,
+        forbidNonWhitelisted: true
+      },
       classTransformer: true,
     });
   }
@@ -86,7 +89,7 @@ export class App {
 
   public async listen(): Promise<void> {
     await this.initializeDatabase();
-    
+
     this.app.listen(environment.port, () => {
       logger.info(`Server running on port ${environment.port}`);
     });
