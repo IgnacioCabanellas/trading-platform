@@ -32,7 +32,7 @@ export class Limit extends Model {
   @Column({
     type: DataType.DECIMAL(20, 8),
     allowNull: false,
-    field: 'max_amount',
+    field: "max_amount",
   })
   @IsNumber()
   maxAmount!: number;
@@ -40,7 +40,7 @@ export class Limit extends Model {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    field: 'max_daily_orders',
+    field: "max_daily_orders",
   })
   @IsNumber()
   maxDailyOrders!: number;
@@ -56,7 +56,7 @@ export class Limit extends Model {
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: 'created_by',
+    field: "created_by",
   })
   @IsUUID()
   createdBy?: string;

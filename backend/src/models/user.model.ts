@@ -54,7 +54,7 @@ export class User extends Model {
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: 'limit_id',
+    field: "limit_id",
   })
   @IsUUID()
   limitId?: string;
@@ -70,7 +70,7 @@ export class User extends Model {
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: 'created_by',
+    field: "created_by",
   })
   @IsUUID()
   createdBy?: string;

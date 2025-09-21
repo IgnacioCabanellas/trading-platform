@@ -35,7 +35,7 @@ export class App {
       routePrefix: "/api",
       validation: {
         whitelist: true,
-        forbidNonWhitelisted: true
+        forbidNonWhitelisted: true,
       },
       classTransformer: true,
     });
