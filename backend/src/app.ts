@@ -4,6 +4,7 @@ import { OpenAPIObject } from "openapi3-ts";
 import "reflect-metadata";
 import {
   getMetadataArgsStorage,
+  RoutingControllersOptions,
   useContainer,
   useExpressServer,
 } from "routing-controllers";
@@ -30,7 +31,11 @@ export class App {
 
   private initializeControllers(): void {
     useContainer(Container);
-    useExpressServer(this.app, {
+    useExpressServer(this.app, this.buildRoutingControllerConfig());
+  }
+
+  private buildRoutingControllerConfig(): RoutingControllersOptions {
+    return {
       controllers: [this.getControllersDirectoryPattern()],
       routePrefix: "/api",
       validation: {
@@ -38,7 +43,7 @@ export class App {
         forbidNonWhitelisted: true,
       },
       classTransformer: true,
-    });
+    };
   }
 
   private initializePreControllerMiddleware(): void {
@@ -60,7 +65,7 @@ export class App {
     const storage = getMetadataArgsStorage();
     return routingControllersToSpec(
       storage,
-      { controllers: [this.getControllersDirectoryPattern()] },
+      this.buildRoutingControllerConfig(),
       {
         components: {
           schemas,
