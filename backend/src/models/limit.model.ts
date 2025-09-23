@@ -1,4 +1,3 @@
-import { IsBoolean, IsNumber, IsString, IsUUID } from "class-validator";
 import {
   Column,
   CreatedAt,
@@ -18,31 +17,42 @@ export class Limit extends Model {
   @Column({
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
+    validate: {
+      isUUID: 4,
+    },
   })
-  @IsUUID()
   id!: string;
 
   @Column({
     type: DataType.STRING(100),
     allowNull: false,
+    validate: {
+      notEmpty: true,
+      len: [1, 100],
+    },
   })
-  @IsString()
   name!: string;
 
   @Column({
     type: DataType.DECIMAL(20, 8),
     allowNull: false,
     field: "max_amount",
+    validate: {
+      isDecimal: true,
+      min: 0,
+    },
   })
-  @IsNumber()
   maxAmount!: number;
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
     field: "max_daily_orders",
+    validate: {
+      isInt: true,
+      min: 0,
+    },
   })
-  @IsNumber()
   maxDailyOrders!: number;
 
   @Column({
@@ -50,15 +60,19 @@ export class Limit extends Model {
     allowNull: false,
     defaultValue: true,
   })
-  @IsBoolean()
   enabled!: boolean;
 
   @Column({
     type: DataType.UUID,
     allowNull: true,
     field: "created_by",
+    validate: {
+      isUUID: {
+        args: 4,
+        msg: "createdBy must be a valid UUID",
+      },
+    },
   })
-  @IsUUID()
   createdBy?: string;
 
   @CreatedAt
