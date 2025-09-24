@@ -1,21 +1,21 @@
-import { validationMetadatasToSchemas } from "class-validator-jsonschema";
-import express from "express";
-import { OpenAPIObject } from "openapi3-ts";
-import "reflect-metadata";
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import express from 'express';
+import { OpenAPIObject } from 'openapi3-ts';
+import 'reflect-metadata';
 import {
   getMetadataArgsStorage,
   RoutingControllersOptions,
   useContainer,
   useExpressServer,
-} from "routing-controllers";
-import { routingControllersToSpec } from "routing-controllers-openapi";
-import * as swagger from "swagger-ui-express";
-import { Container } from "typedi";
+} from 'routing-controllers';
+import { routingControllersToSpec } from 'routing-controllers-openapi';
+import * as swagger from 'swagger-ui-express';
+import { Container } from 'typedi';
 
-import { environment, isDevelopment } from "@/config/environment";
-import { sequelize } from "@/config/sequelize";
-import { LoggerService } from "@/shared/logger.service";
-import { requestLogger } from "@/shared/request-logger.middleware";
+import { environment, isDevelopment } from '@/config/environment';
+import { sequelize } from '@/config/sequelize';
+import { LoggerService } from '@/shared/logger.service';
+import { requestLogger } from '@/shared/request-logger.middleware';
 
 const logger = Container.get(LoggerService);
 
@@ -37,7 +37,7 @@ export class App {
   private buildRoutingControllerConfig(): RoutingControllersOptions {
     return {
       controllers: [this.getControllersDirectoryPattern()],
-      routePrefix: "/api",
+      routePrefix: '/api',
       validation: {
         whitelist: true,
         forbidNonWhitelisted: true,
@@ -53,13 +53,13 @@ export class App {
   private initializePostControllerMiddleware(): void {
     if (isDevelopment()) {
       const specs = this.buildOpenApiSpecs();
-      this.app.use("/docs", swagger.serve, swagger.setup(specs));
+      this.app.use('/docs', swagger.serve, swagger.setup(specs));
     }
   }
 
   private buildOpenApiSpecs(): OpenAPIObject {
     const schemas = validationMetadatasToSchemas({
-      refPointerPrefix: "#/components/schemas/",
+      refPointerPrefix: '#/components/schemas/',
     });
 
     const storage = getMetadataArgsStorage();
@@ -71,8 +71,8 @@ export class App {
           schemas,
         },
         info: {
-          title: "Trading Platform",
-          version: "1.0.0",
+          title: 'Trading Platform',
+          version: '1.0.0',
         },
       }
     );
@@ -85,7 +85,7 @@ export class App {
   private async initializeDatabase(): Promise<void> {
     try {
       await sequelize.authenticate();
-      logger.info("Database connection established successfully");
+      logger.info('Database connection established successfully');
     } catch (error) {
       if (error instanceof Error) {
         logger.error(`Unable to connect to the database: ${error}`);

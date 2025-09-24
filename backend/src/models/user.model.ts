@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 import {
   Column,
   CreatedAt,
@@ -7,15 +7,15 @@ import {
   PrimaryKey,
   Table,
   UpdatedAt,
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 enum UserRole {
-  user = "USER",
-  admin = "ADMIN",
+  user = 'USER',
+  admin = 'ADMIN',
 }
 
 @Table({
-  tableName: "users",
+  tableName: 'users',
   timestamps: true,
 })
 export class User extends Model {
@@ -62,11 +62,11 @@ export class User extends Model {
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: "limit_id",
+    field: 'limit_id',
     validate: {
       isUUID: {
         args: 4,
-        msg: "limitId must be a valid UUID",
+        msg: 'limitId must be a valid UUID',
       },
     },
   })
@@ -82,11 +82,11 @@ export class User extends Model {
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: "created_by",
+    field: 'created_by',
     validate: {
       isUUID: {
         args: 4,
-        msg: "createdBy must be a valid UUID",
+        msg: 'createdBy must be a valid UUID',
       },
     },
   })
