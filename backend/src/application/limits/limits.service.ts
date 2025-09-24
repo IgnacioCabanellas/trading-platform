@@ -1,15 +1,15 @@
-import { BadRequestError, NotFoundError } from "routing-controllers";
-import { Op, WhereOptions } from "sequelize";
-import { Service } from "typedi";
+import { BadRequestError, NotFoundError } from 'routing-controllers';
+import { Op, WhereOptions } from 'sequelize';
+import { Service } from 'typedi';
 
-import { Limit } from "@/models/limit.model";
+import { Limit } from '@/models/limit.model';
 
 import {
   CreateLimitRequest,
   GetLimitsRequest,
   LimitResponse,
   UpdateLimitRequest,
-} from "./limits.dto";
+} from './limits.dto';
 
 @Service()
 export class LimitsService {

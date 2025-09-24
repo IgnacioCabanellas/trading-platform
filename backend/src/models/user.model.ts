@@ -1,5 +1,4 @@
-import { IsBoolean, IsEmail, IsEnum, IsString, IsUUID } from "class-validator";
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 import {
   Column,
   CreatedAt,
@@ -8,15 +7,15 @@ import {
   PrimaryKey,
   Table,
   UpdatedAt,
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 enum UserRole {
-  user = "USER",
-  admin = "ADMIN",
+  user = 'USER',
+  admin = 'ADMIN',
 }
 
 @Table({
-  tableName: "users",
+  tableName: 'users',
   timestamps: true,
 })
 export class User extends Model {
@@ -24,39 +23,53 @@ export class User extends Model {
   @Column({
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
+    validate: {
+      isUUID: 4,
+    },
   })
-  @IsUUID()
   id!: string;
 
   @Column({
     type: DataType.STRING(255),
     allowNull: false,
     unique: true,
+    validate: {
+      isEmail: true,
+    },
   })
-  @IsEmail()
   email!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+      len: [6, 255],
+    },
   })
-  @IsString()
   password!: string;
 
   @Column({
     type: DataTypes.ENUM(...Object.values(UserRole)),
     allowNull: false,
     defaultValue: UserRole.user,
+    validate: {
+      isIn: [Object.values(UserRole)],
+    },
   })
-  @IsEnum(UserRole)
   role!: UserRole;
 
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: "limit_id",
+    field: 'limit_id',
+    validate: {
+      isUUID: {
+        args: 4,
+        msg: 'limitId must be a valid UUID',
+      },
+    },
   })
-  @IsUUID()
   limitId?: string;
 
   @Column({
@@ -64,15 +77,19 @@ export class User extends Model {
     allowNull: false,
     defaultValue: true,
   })
-  @IsBoolean()
   enabled!: boolean;
 
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: "created_by",
+    field: 'created_by',
+    validate: {
+      isUUID: {
+        args: 4,
+        msg: 'createdBy must be a valid UUID',
+      },
+    },
   })
-  @IsUUID()
   createdBy?: string;
 
   @CreatedAt

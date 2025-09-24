@@ -1,21 +1,21 @@
-import * as bcrypt from "bcrypt";
-import * as jwt from "jsonwebtoken";
-import { Service } from "typedi";
+import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
+import { Service } from 'typedi';
 
 import {
   LoginRequest,
   RegisterRequest,
   RegisterResponse,
-} from "@/application/auth/auth.dto";
-import { environment } from "@/config/environment";
-import { User } from "@/models/user.model";
+} from '@/application/auth/auth.dto';
+import { environment } from '@/config/environment';
+import { User } from '@/models/user.model';
 
 @Service()
 export class AuthService {
   public async login(request: LoginRequest): Promise<string> {
     const user = await User.findOne({ where: { email: request.email } });
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new Error('Invalid credentials');
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -23,7 +23,7 @@ export class AuthService {
       user.password
     );
     if (!isPasswordValid) {
-      throw new Error("Invalid credentials");
+      throw new Error('Invalid credentials');
     }
 
     return this.generateToken(user.id, user.email);
@@ -33,7 +33,7 @@ export class AuthService {
     const payload = { userId, email };
     const secret = environment.jwtSecret;
 
-    return jwt.sign(payload, secret, { expiresIn: "24h" });
+    return jwt.sign(payload, secret, { expiresIn: '24h' });
   }
 
   public async createAccount(
@@ -43,7 +43,7 @@ export class AuthService {
       where: { email: request.email },
     });
     if (existingUser) {
-      throw new Error("Email already in use");
+      throw new Error('Email already in use');
     }
 
     const saltRounds = 10;

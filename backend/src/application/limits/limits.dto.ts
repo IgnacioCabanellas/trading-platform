@@ -6,7 +6,7 @@ import {
   IsPositive,
   IsString,
   Length,
-} from "class-validator";
+} from 'class-validator';
 
 export class GetLimitsRequest {
   @IsOptional()
