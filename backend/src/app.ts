@@ -87,7 +87,9 @@ export class App {
       await sequelize.authenticate();
       logger.info("Database connection established successfully");
     } catch (error) {
-      logger.error(`Unable to connect to the database: ${error}`);
+      if (error instanceof Error) {
+        logger.error(`Unable to connect to the database: ${error}`);
+      }
       process.exit(1);
     }
   }
