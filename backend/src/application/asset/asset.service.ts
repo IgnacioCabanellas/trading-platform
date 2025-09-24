@@ -1,15 +1,15 @@
-import { BadRequestError, NotFoundError } from "routing-controllers";
-import { Op, WhereOptions } from "sequelize";
-import { Service } from "typedi";
+import { BadRequestError, NotFoundError } from 'routing-controllers';
+import { Op, WhereOptions } from 'sequelize';
+import { Service } from 'typedi';
 
-import { Asset } from "@/models/asset.model";
+import { Asset } from '@/models/asset.model';
 
 import {
   AssetResponse,
   CreateAssetRequest,
   GetAssetRequest,
   UpdateAssetRequest,
-} from "./asset.dto";
+} from './asset.dto';
 
 @Service()
 export class AssetService {

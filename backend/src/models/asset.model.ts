@@ -1,4 +1,4 @@
-import { Model } from "sequelize";
+import { Model } from 'sequelize';
 import {
   Column,
   CreatedAt,
@@ -6,10 +6,10 @@ import {
   PrimaryKey,
   Table,
   UpdatedAt,
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 @Table({
-  tableName: "assets",
+  tableName: 'assets',
   timestamps: true,
 })
 export class Asset extends Model {
@@ -44,9 +44,15 @@ export class Asset extends Model {
   enabled!: boolean;
 
   @Column({
-    type: DataType.STRING(100),
-    allowNull: false,
-    field: "created_by",
+    type: DataType.UUID,
+    allowNull: true,
+    field: 'created_by',
+    validate: {
+      isUUID: {
+        args: 4,
+        msg: 'createdBy must be a valid UUID',
+      },
+    },
   })
   createdBy!: string;
 
