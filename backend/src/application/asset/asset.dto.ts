@@ -10,18 +10,18 @@ export class GetAssetRequest {
   @IsString()
   @Length(1, 100)
   @IsNotEmpty()
-  name!: string;
+  name?: string;
 
   @IsString()
   @Length(1, 10)
-  symbol!: string;
+  symbol?: string;
 
   @IsString()
   @Length(1, 300)
-  description!: string;
+  description?: string;
 
   @IsBoolean()
-  enabled!: boolean;
+  enabled?: boolean;
 }
 
 export class CreateAssetRequest {
