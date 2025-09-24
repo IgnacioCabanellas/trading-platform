@@ -7,19 +7,23 @@ import {
 } from "class-validator";
 
 export class GetAssetRequest {
+  @IsOptional()
   @IsString()
   @Length(1, 100)
   @IsNotEmpty()
   name?: string;
 
+  @IsOptional()
   @IsString()
   @Length(1, 10)
   symbol?: string;
 
+  @IsOptional()
   @IsString()
   @Length(1, 300)
   description?: string;
 
+  @IsOptional()
   @IsBoolean()
   enabled?: boolean;
 }
