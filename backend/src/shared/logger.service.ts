@@ -1,7 +1,7 @@
-import { Service } from "typedi";
-import winston from "winston";
+import { Service } from 'typedi';
+import winston from 'winston';
 
-import { isDevelopment } from "@/config/environment";
+import { isDevelopment } from '@/config/environment';
 
 @Service()
 export class LoggerService {
@@ -10,10 +10,10 @@ export class LoggerService {
   constructor() {
     const transports: winston.transport[] = [new winston.transports.Console()];
     if (isDevelopment()) {
-      transports.push(new winston.transports.File({ filename: "debug.log" }));
+      transports.push(new winston.transports.File({ filename: 'debug.log' }));
     }
     this.logger = winston.createLogger({
-      level: isDevelopment() ? "debug" : "info",
+      level: isDevelopment() ? 'debug' : 'info',
       format: winston.format.combine(
         winston.format.timestamp(),
         winston.format.printf(({ timestamp, level, message }) => {

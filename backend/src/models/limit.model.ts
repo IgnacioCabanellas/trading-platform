@@ -6,10 +6,10 @@ import {
   PrimaryKey,
   Table,
   UpdatedAt,
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 @Table({
-  tableName: "limits",
+  tableName: 'limits',
   timestamps: true,
 })
 export class Limit extends Model {
@@ -36,7 +36,7 @@ export class Limit extends Model {
   @Column({
     type: DataType.DECIMAL(20, 8),
     allowNull: false,
-    field: "max_amount",
+    field: 'max_amount',
     validate: {
       isDecimal: true,
       min: 0,
@@ -47,7 +47,7 @@ export class Limit extends Model {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    field: "max_daily_orders",
+    field: 'max_daily_orders',
     validate: {
       isInt: true,
       min: 0,
@@ -65,11 +65,11 @@ export class Limit extends Model {
   @Column({
     type: DataType.UUID,
     allowNull: true,
-    field: "created_by",
+    field: 'created_by',
     validate: {
       isUUID: {
         args: 4,
-        msg: "createdBy must be a valid UUID",
+        msg: 'createdBy must be a valid UUID',
       },
     },
   })

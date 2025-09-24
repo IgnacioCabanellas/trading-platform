@@ -1,8 +1,8 @@
-import js from "@eslint/js";
-import prettier from "eslint-config-prettier";
+import js from '@eslint/js';
+import prettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
-import prettierPlugin from "eslint-plugin-prettier";
-import tseslint from "typescript-eslint";
+import prettierPlugin from 'eslint-plugin-prettier';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   // Base ESLint recommended rules
@@ -22,56 +22,66 @@ export default tseslint.config(
       parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 2020,
-        sourceType: "module",
-        project: "./tsconfig.json",
+        sourceType: 'module',
+        project: './tsconfig.json',
         tsconfigRootDir: import.meta.dirname,
       },
     },
 
     rules: {
-      // Enforce double quotes
-      "quotes": ["error", "double"],
+      // Enforce single quotes
+      quotes: ['error', 'single'],
 
       // Enforce semicolons
-      "semi": ["error", "always"],
+      semi: ['error', 'always'],
 
       // TypeScript specific rules
-      "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }],
-      "@typescript-eslint/explicit-function-return-type": "error",
-      "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-non-null-assertion": "error",
+      '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
+      '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-non-null-assertion': 'error',
 
       // General best practices
-      "prefer-const": "error",
-      "no-var": "error",
-      "object-shorthand": "error",
-      "prefer-template": "error",
-      "no-console": "warn",
+      'prefer-const': 'error',
+      'no-var': 'error',
+      'object-shorthand': 'error',
+      'prefer-template': 'error',
+      'no-console': 'warn',
 
       // Import internal/external sorting.
-      "import/order": ["error", {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
-        "pathGroups": [
-          {
-            pattern: "@/**",
-            group: "internal",
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'internal',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
           },
-        ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "alphabetize": {
-          order: "asc",
-          caseInsensitive: true,
+          'newlines-between': 'always',
         },
-        "newlines-between": "always",
-      }],
+      ],
     },
 
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ['**/*.ts', '**/*.tsx'],
   },
 
   {
     // Configuration for JavaScript files (if any)
-    files: ["**/*.js", "**/*.mjs"],
+    files: ['**/*.js', '**/*.mjs'],
     ...tseslint.configs.disableTypeChecked,
   },
 
@@ -79,18 +89,18 @@ export default tseslint.config(
     // Prettier integration
     ...prettier,
     rules: {
-      "prettier/prettier": "error",
+      'prettier/prettier': 'error',
     },
   },
 
   {
     // Ignore patterns
     ignores: [
-      "node_modules/**",
-      "dist/**",
-      "*.js",
-      "*.d.ts",
-      "eslint.config.mjs",
+      'node_modules/**',
+      'dist/**',
+      '*.js',
+      '*.d.ts',
+      'eslint.config.mjs',
     ],
   }
 );
