@@ -2,7 +2,7 @@ import { NotFoundError } from 'routing-controllers';
 import { Op, WhereOptions } from 'sequelize';
 import { Service } from 'typedi';
 
-import { TradingPair } from '@/models/tradingPair.model';
+import { TradingPair } from '@/models/trading-pair.model';
 
 import {
   CreateTradingPairRequest,
