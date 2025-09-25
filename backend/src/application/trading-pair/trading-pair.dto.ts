@@ -4,12 +4,7 @@ export class GetTradingPairRequest {
   @IsOptional()
   @IsUUID()
   @IsNotEmpty()
-  baseAssetId?: string;
-
-  @IsOptional()
-  @IsUUID()
-  @IsNotEmpty()
-  quoteAssetId?: string;
+  assetId?: string;
 
   @IsOptional()
   @IsBoolean()
@@ -32,7 +27,7 @@ export class CreateTradingPairRequest {
   enabled!: boolean;
 }
 
-export class UpdateTraidingPairRequest {
+export class UpdateTradingPairRequest {
   @IsOptional()
   @IsUUID()
   @IsNotEmpty()
