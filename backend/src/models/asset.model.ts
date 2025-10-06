@@ -1,8 +1,8 @@
-import { Model } from 'sequelize';
 import {
   Column,
   CreatedAt,
   DataType,
+  Model,
   PrimaryKey,
   Table,
   UpdatedAt,
