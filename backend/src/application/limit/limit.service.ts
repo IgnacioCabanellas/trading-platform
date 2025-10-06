@@ -9,10 +9,10 @@ import {
   GetLimitsRequest,
   LimitResponse,
   UpdateLimitRequest,
-} from './limits.dto';
+} from './limit.dto';
 
 @Service()
-export class LimitsService {
+export class LimitService {
   private static toResponse(limit: Limit): LimitResponse {
     return {
       id: limit.id,
@@ -40,7 +40,7 @@ export class LimitsService {
     const limits = await Limit.findAll({
       where: whereCondition,
     });
-    return LimitsService.toResponseArray(limits);
+    return LimitService.toResponseArray(limits);
   }
 
   async getById(id: string): Promise<LimitResponse> {
@@ -50,7 +50,7 @@ export class LimitsService {
       throw new NotFoundError(`Limit with id=${id} not found`);
     }
 
-    return LimitsService.toResponse(limit);
+    return LimitService.toResponse(limit);
   }
 
   async update(id: string, body: UpdateLimitRequest): Promise<LimitResponse> {
@@ -73,7 +73,7 @@ export class LimitsService {
     }
 
     await limit.update(updateData);
-    return LimitsService.toResponse(limit);
+    return LimitService.toResponse(limit);
   }
 
   async create(body: CreateLimitRequest): Promise<LimitResponse> {
@@ -86,7 +86,7 @@ export class LimitsService {
     }
 
     const limit = await Limit.create({ ...body });
-    return LimitsService.toResponse(limit);
+    return LimitService.toResponse(limit);
   }
 
   async delete(id: string): Promise<void> {
