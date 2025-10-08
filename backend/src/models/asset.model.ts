@@ -34,6 +34,7 @@ export class Asset extends Model {
 
   @Column({
     type: DataType.STRING(100),
+    allowNull: false,
   })
   description!: string;
 
