@@ -41,6 +41,7 @@ export class AssetService {
     const assets = await Asset.findAll({
       where: whereCondition,
     });
+
     return AssetService.toResponseArray(assets);
   }
 
@@ -74,6 +75,7 @@ export class AssetService {
     }
 
     await asset.update(updateData);
+
     return AssetService.toResponse(asset);
   }
 
@@ -87,6 +89,7 @@ export class AssetService {
     }
 
     const asset = await Asset.create({ ...body });
+
     return AssetService.toResponse(asset);
   }
 
