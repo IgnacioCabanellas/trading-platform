@@ -16,6 +16,7 @@ export class GetAssetRequest {
   @IsOptional()
   @IsString()
   @Length(1, 10)
+  @IsNotEmpty()
   symbol?: string;
 
   @IsOptional()
@@ -45,7 +46,6 @@ export class CreateAssetRequest {
   description?: string;
 
   @IsBoolean()
-  @IsNotEmpty()
   enabled!: boolean;
 }
 
