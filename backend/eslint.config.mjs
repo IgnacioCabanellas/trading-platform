@@ -36,7 +36,18 @@ export default tseslint.config(
       semi: ['error', 'always'],
 
       // TypeScript specific rules
-      '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',
@@ -72,6 +83,13 @@ export default tseslint.config(
             caseInsensitive: true,
           },
           'newlines-between': 'always',
+        },
+      ],
+      "no-restricted-imports": "off",
+      "@typescript-eslint/no-restricted-imports": [
+        "error",
+        {
+          patterns: ["./*", "../*"],
         },
       ],
     },

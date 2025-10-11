@@ -17,8 +17,8 @@ import {
   GetLimitsRequest,
   LimitResponse,
   UpdateLimitRequest,
-} from './limit.dto';
-import { LimitService } from './limit.service';
+} from '@/application/limit/limit.dto';
+import { LimitService } from '@/application/limit/limit.service';
 
 @JsonController('/limits')
 @Service()

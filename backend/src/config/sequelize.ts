@@ -1,9 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import { Limit } from '../models/limit.model';
-import { User } from '../models/user.model';
-
-import { environment } from './environment';
+import { environment } from '@/config/environment';
+import { Limit } from '@/models/limit.model';
+import { User } from '@/models/user.model';
 
 const models = [User, Limit];
 
