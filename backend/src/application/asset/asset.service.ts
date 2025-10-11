@@ -2,14 +2,13 @@ import { BadRequestError, NotFoundError } from 'routing-controllers';
 import { Op, WhereOptions } from 'sequelize';
 import { Service } from 'typedi';
 
-import { Asset } from '@/models/asset.model';
-
 import {
   AssetResponse,
   CreateAssetRequest,
   GetAssetRequest,
   UpdateAssetRequest,
-} from './asset.dto';
+} from '@/application/asset/asset.dto';
+import { Asset } from '@/models/asset.model';
 
 @Service()
 export class AssetService {
@@ -28,18 +27,18 @@ export class AssetService {
   }
 
   async get(request: GetAssetRequest): Promise<AssetResponse[]> {
-    const whereCondition: WhereOptions = {
+    const where: WhereOptions = {
       enabled: true,
     };
 
     if (request.name) {
-      whereCondition.name = {
+      where.name = {
         [Op.iLike]: `%${request.name}%`,
       };
     }
 
     const assets = await Asset.findAll({
-      where: whereCondition,
+      where,
     });
 
     return AssetService.toResponseArray(assets);

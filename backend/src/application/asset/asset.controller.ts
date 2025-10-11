@@ -17,8 +17,8 @@ import {
   CreateAssetRequest,
   GetAssetRequest,
   UpdateAssetRequest,
-} from './asset.dto';
-import { AssetService } from './asset.service';
+} from '@/application/asset/asset.dto';
+import { AssetService } from '@/application/asset/asset.service';
 
 @JsonController('/asset')
 @Service()
@@ -30,6 +30,7 @@ export class AssetController {
   get(@QueryParams() params: GetAssetRequest): Promise<AssetResponse[]> {
     return this.assetService.get(params);
   }
+
   @Get('/:id')
   @OpenAPI({ summary: 'Get asset by id' })
   getById(@Param('id') id: string): Promise<AssetResponse> {

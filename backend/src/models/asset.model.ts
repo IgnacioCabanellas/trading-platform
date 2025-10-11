@@ -33,10 +33,10 @@ export class Asset extends Model {
   name!: string;
 
   @Column({
-    type: DataType.STRING(100),
-    allowNull: false,
+    type: DataType.TEXT,
+    allowNull: true,
   })
-  description!: string;
+  description?: string;
 
   @Column({
     type: DataType.BOOLEAN,

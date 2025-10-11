@@ -1,67 +1,37 @@
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsBoolean, IsOptional, Length } from 'class-validator';
 
 export class GetAssetRequest {
   @IsOptional()
-  @IsString()
   @Length(1, 100)
-  @IsNotEmpty()
   name?: string;
 
   @IsOptional()
-  @IsString()
   @Length(1, 10)
-  @IsNotEmpty()
   symbol?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 300)
-  @IsNotEmpty()
-  description?: string;
-
-  @IsOptional()
-  @IsBoolean()
-  enabled?: boolean;
 }
 
 export class CreateAssetRequest {
-  @IsString()
   @Length(1, 10)
-  @IsNotEmpty()
   symbol!: string;
 
-  @IsString()
   @Length(1, 100)
-  @IsNotEmpty()
   name!: string;
 
-  @IsString()
+  @IsOptional()
   @Length(1, 300)
-  description?: string;
-
-  @IsBoolean()
-  enabled!: boolean;
+  description!: string;
 }
 
 export class UpdateAssetRequest {
   @IsOptional()
-  @IsString()
   @Length(1, 10)
   symbol?: string;
 
   @IsOptional()
-  @IsString()
   @Length(1, 100)
   name?: string;
 
   @IsOptional()
-  @IsString()
   @Length(1, 300)
   description?: string;
 
@@ -74,6 +44,6 @@ export interface AssetResponse {
   id: string;
   symbol: string;
   name: string;
-  description: string;
+  description: string | undefined;
   enabled: boolean;
 }
