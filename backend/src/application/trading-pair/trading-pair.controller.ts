@@ -17,32 +17,32 @@ import {
   GetTradingPairRequest,
   TradingPairResponse,
   UpdateTradingPairRequest,
-} from './trading-pair.dto';
-import { TradingPairService } from './trading-pair.service';
+} from '@/application/trading-pair/trading-pair.dto';
+import { TradingPairService } from '@/application/trading-pair/trading-pair.service';
 
 @JsonController('/trading-pair')
 @Service()
 export class TradingPairController {
-  constructor(private readonly TradingPairService: TradingPairService) {}
+  constructor(private readonly tradingPairService: TradingPairService) {}
 
   @Get()
   @OpenAPI({ summary: 'Get trading-pairs' })
   get(
     @QueryParams() params: GetTradingPairRequest
   ): Promise<TradingPairResponse[]> {
-    return this.TradingPairService.get(params);
+    return this.tradingPairService.get(params);
   }
 
   @Get('/:id')
   @OpenAPI({ summary: 'Get trading-pair by id' })
   getById(@Param('id') id: string): Promise<TradingPairResponse> {
-    return this.TradingPairService.getById(id);
+    return this.tradingPairService.getById(id);
   }
 
   @Post()
   @OpenAPI({ summary: 'Create trading-pair' })
   create(@Body() body: CreateTradingPairRequest): Promise<TradingPairResponse> {
-    return this.TradingPairService.create(body);
+    return this.tradingPairService.create(body);
   }
 
   @Put('/:id')
@@ -51,13 +51,13 @@ export class TradingPairController {
     @Param('id') id: string,
     @Body() body: UpdateTradingPairRequest
   ): Promise<TradingPairResponse> {
-    return this.TradingPairService.update(id, body);
+    return this.tradingPairService.update(id, body);
   }
 
   @Delete('/:id')
   @OpenAPI({ summary: 'Delete trading-pair' })
-  @OnUndefined(200)
+  @OnUndefined(204)
   delete(@Param('id') id: string): Promise<void> {
-    return this.TradingPairService.delete(id);
+    return this.tradingPairService.delete(id);
   }
 }

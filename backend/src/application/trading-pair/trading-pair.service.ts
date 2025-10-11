@@ -2,14 +2,13 @@ import { NotFoundError } from 'routing-controllers';
 import { Op, WhereOptions } from 'sequelize';
 import { Service } from 'typedi';
 
-import { TradingPair } from '@/models/trading-pair.model';
-
 import {
   CreateTradingPairRequest,
   GetTradingPairRequest,
   TradingPairResponse,
   UpdateTradingPairRequest,
-} from './trading-pair.dto';
+} from '@/application/trading-pair/trading-pair.dto';
+import { TradingPair } from '@/models/trading-pair.model';
 
 @Service()
 export class TradingPairService {
@@ -29,20 +28,24 @@ export class TradingPairService {
   }
 
   async get(request: GetTradingPairRequest): Promise<TradingPairResponse[]> {
-    const whereCondition: WhereOptions = {
+    let where: WhereOptions = {
       enabled: true,
-      ...(request.assetId?.trim()
-        ? {
-            [Op.or]: [
-              { baseAssetId: request.assetId },
-              { quoteAssetId: request.assetId },
-            ],
-          }
-        : {}),
     };
+
+    if (request.assetId) {
+      where = {
+        ...where,
+        [Op.or]: [
+          { baseAssetId: request.assetId },
+          { quoteAssetId: request.assetId },
+        ],
+      };
+    }
+
     const tradingPairs = await TradingPair.findAll({
-      where: whereCondition,
+      where,
     });
+
     return TradingPairService.toResponseArray(tradingPairs);
   }
 
