@@ -37,6 +37,12 @@ export class AssetService {
       };
     }
 
+    if (request.symbol) {
+      where.symbol = {
+        [Op.iLike]: `${request.symbol}`,
+      };
+    }
+
     const assets = await Asset.findAll({
       where,
     });
