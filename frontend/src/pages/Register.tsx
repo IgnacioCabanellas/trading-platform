@@ -47,7 +47,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         <div className="flex items-center justify-center min-h-screen">
             <div className="bg-green-900 border-black border-2 p-10 pt-6 rounded">
                 <form onSubmit={handleSubmit}>
-                    <h2 className="font-bold">Formulario de Registro</h2>
+                    <h2 className="font-bold">Register Form</h2>
                     <div>
                         <label htmlFor="email" className="block text-white mb-1">
                                     Email
@@ -91,6 +91,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                                 />
                     </div>
                     <button type="submit" className="btn btn-primary">Sign Up</button>
+                    <a href="/" className="btn btn-secondary ml-2">Go back</a>
                 </form>
             </div>
         </div>
