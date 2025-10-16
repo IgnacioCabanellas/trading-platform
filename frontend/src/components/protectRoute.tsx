@@ -6,13 +6,11 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const jwt = localStorage.getItem("jwt"); // <-- check "jwt" key
+  const jwt = localStorage.getItem("jwt"); 
 
-  // If there's no JWT, redirect to login
   if (!jwt) {
     return <Navigate to="/login" replace />;
   }
-
-  // If JWT exists, render the protected page
+  
   return children;
 }
