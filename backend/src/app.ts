@@ -1,4 +1,5 @@
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import cors from 'cors';
 import express from 'express';
 import { OpenAPIObject } from 'openapi3-ts';
 import 'reflect-metadata';
@@ -47,6 +48,7 @@ export class App {
   }
 
   private initializePreControllerMiddleware(): void {
+    this.app.use(cors({ origin: 'http://localhost:5173' }));
     this.app.use(requestLogger());
   }
 
