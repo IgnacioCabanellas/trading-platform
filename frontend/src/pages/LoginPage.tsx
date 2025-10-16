@@ -81,7 +81,7 @@ export default function Login() {
                     </div>
                     <button type="submit" className="btn btn-primary">Log in</button>
                     <div className="text-sm pt-2 text-gray-500">Don’t have an account?{" "}
-                    <a href="/signUp" className="text-indigo-600 hover:underline">
+                    <a href="/register" className="text-indigo-600 hover:underline">
                         Register
                     </a>
                     </div>
