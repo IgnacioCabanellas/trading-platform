@@ -47,47 +47,36 @@ export default function Login() {
       style={{ backgroundImage: "url('/green-matrix-background-2560x1600-wallpaper.jpg')" }}
     >
         <div className="flex items-center justify-center min-h-screen">
-            <div className="bg-green-900 border-black border-2 p-10 rounded">
-                <h2 className="font-black text-black"> - Wanna Trade??</h2>
-                <h2 className="font-black text-black"> - Let's log in, you punk.</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="email" className="block text-white mb-1">
-                            Email
-                        </label>
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
-                            required
-                        />
-                    </div>
-                    <div className="pb-2">
-                        <label htmlFor="password" className="block text-white mb-1">
-                            Password
-                        </label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
-                            required
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Log in</button>
+            <form onSubmit={handleSubmit}>
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <h2 className=""> Trading-Platform</h2>
+                    <label className="label">Email</label>
+                    <input 
+                        type="email" 
+                        name="email"
+                        className="input"
+                        value={formData.email}
+                        onChange={handleChange} 
+                        placeholder="Email" />
+
+                    <label className="label">Password</label>
+                    <input 
+                        type="password" 
+                        className="input" 
+                        value={formData.password}
+                        onChange={handleChange} 
+                        placeholder="Password" 
+                    />
+
+                    <button type="submit" className="btn btn-neutral mt-4">Login</button>
                     <div className="text-sm pt-2 text-gray-500">Don’t have an account?{" "}
-                    <a href="/register" className="text-indigo-600 hover:underline">
-                        Register
-                    </a>
+                        <a href="/register" className="text-indigo-600 hover:underline">
+                            Register
+                        </a>
                     </div>
-                </form>
-            </div>    
-        </div>
+                </fieldset>
+            </form>
+        </div>    
     </div>
     )
 }
