@@ -41,6 +41,7 @@ export class Asset extends Model {
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
+    defaultValue: true,
   })
   enabled!: boolean;
 
