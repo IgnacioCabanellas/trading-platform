@@ -50,7 +50,6 @@ export default tseslint.config(
       ],
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-non-null-assertion': 'error',
 
       // General best practices
       'prefer-const': 'error',
@@ -85,13 +84,13 @@ export default tseslint.config(
           'newlines-between': 'always',
         },
       ],
-      "no-restricted-imports": "off",
-      "@typescript-eslint/no-restricted-imports": [
-        "error",
+      'no-restricted-syntax': [
+        'error',
         {
-          patterns: ["./*", "../*"],
+          selector: "ImportDeclaration[source.value=/^\\.\\.?\\u002F/]",
+          message: "Use '@/…' instead of relative imports."
         },
-      ],
+      ]
     },
 
     files: ['**/*.ts', '**/*.tsx'],

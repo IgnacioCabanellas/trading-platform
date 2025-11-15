@@ -1,13 +1,10 @@
-import './App.css';
+import '@/App.css';
+import type { JSX } from 'react';
 
-function App() {
+export default function App(): JSX.Element {
   return (
-    <>
-      <div className="app-container">
-        <h1>Trading platform</h1>
-      </div>
-    </>
+    <div className="app-container">
+      <h1>Trading platform</h1>
+    </div>
   );
 }
-
-export default App;
