@@ -11,9 +11,9 @@ import {
 } from 'routing-controllers';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import * as swagger from 'swagger-ui-express';
+import { environment, isDevelopment } from '@/config/environment';
 import { Container } from 'typedi';
 
-import { environment, isDevelopment } from '@/config/environment';
 import { sequelize } from '@/config/sequelize';
 import { LoggerService } from '@/shared/logger.service';
 import { requestLogger } from '@/shared/request-logger.middleware';
