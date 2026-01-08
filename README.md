@@ -26,7 +26,7 @@ The main objective of this platform is to simulate a basic exchange where users 
 | ---------- | ---------------- | ------------------------------------------------------------------------ |
 | react      | Frontend Library | Framework for building user interfaces                                   |
 | Vite       | Build Tool       | Fast development server and build tool with HMR (Hot Module Replacement) |
-| Typescript | Lenguage         | Static type checking for JavaScript                                      |
+| Typescript | Language         | Static type checking for JavaScript                                      |
 
 ## 📦 Installation
 
